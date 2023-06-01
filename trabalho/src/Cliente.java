@@ -5,19 +5,29 @@ public class Cliente {
     private String endereco;
     private String escolaridade;
     private String estadoCiv;
-    private Date nascimento;
+    private String nascimento;
     private Agencia agencia;
-    private Conta conta;
-    //alternativa:
-    /*private String nroConta;
-
-    public String getNroConta() {
-        return nroConta;
+    protected Conta conta;
+    //Exercicio 3a
+    public Cliente(String CPF, String Nome){
+        if(GeraCpfCnpj.isCPF(CPF))
+            this.CPF= CPF;
+        else throw new CpfInvalidoException("CPF invalido!");
+        this.Nome = Nome;
     }
-    public void setNroConta(String nroConta) {
-        this.nroConta = nroConta;
-    }*/
-
+    //Exercicio 3b
+    public Cliente(){}
+    public Cliente(String CPF,String Nome,String endereco,String escolaridade,String estadoCiv,String nascimento,Agencia agencia){
+        if(GeraCpfCnpj.isCPF(CPF))
+            this.CPF= CPF;
+        else throw new CpfInvalidoException("CPF invalido!");
+        this.Nome = Nome;
+        this.endereco=endereco;
+        this.escolaridade=escolaridade;
+        this.estadoCiv=estadoCiv;
+        this.nascimento=nascimento;
+        this.agencia=agencia;
+    }
     public Agencia getAgencia() {
         return agencia;
     }
@@ -27,7 +37,7 @@ public class Cliente {
     public Conta getConta() {
         return conta;
     }
-    public Date getNascimento() {
+    public String getNascimento() {
         return nascimento;
     }
     public String getCPF() {
@@ -63,7 +73,7 @@ public class Cliente {
     public void setEstadoCiv(String estadoCiv) {
         this.estadoCiv = estadoCiv;
     }
-    public void setNascimento(Date nascimento) {
+    public void setNascimento(String nascimento) {
         this.nascimento = nascimento;
     }
 }

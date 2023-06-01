@@ -2,6 +2,11 @@ import java.util.Date;
 public class ContaSaldo extends Conta{
     private double limSaque;
     private double limTransfe;
+    public ContaSaldo(String nro,Agencia agencia,String senha,double limSaque, double limTransfe){
+        super(nro,agencia,senha);
+        this.limSaque=limSaque;
+        this.limTransfe=limTransfe;
+    }
     public double getLimSaque() {
         return limSaque;
     }

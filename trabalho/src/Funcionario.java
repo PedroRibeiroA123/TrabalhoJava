@@ -10,7 +10,28 @@ public class Funcionario {
     private String cargo;
     private double salario;
     private int anoIngresso;
-    private Date dataNascimento;
+    private String dataNascimento;
+    public Funcionario(String CPF,String nome,String nroCT,String RG,String endereco,String sexo,String estadoCivil,String cargo,double salario,int anoIngresso,String dataNascimento){
+        if(GeraCpfCnpj.isCPF(CPF))
+            this.CPF= CPF;
+        else throw new CpfInvalidoException("CPF invalido!");
+        this.nome=nome;
+        this.nroCT=nroCT;
+        this.RG=RG;
+        this.endereco=endereco;
+        this.sexo=sexo;
+        this.estadoCivil=estadoCivil;
+        this.cargo=cargo;
+        this.salario=salario;
+        this.anoIngresso=anoIngresso;
+        this.dataNascimento=dataNascimento;
+    }
+    public double calcSalario(){
+        int ano = java.time.Year.now().getValue();
+        if(ano - anoIngresso >=15)
+            return (salario + salario*0.1);
+        else return salario;
+    }
     public String getEndereco() {
         return endereco;
     }
@@ -20,7 +41,7 @@ public class Funcionario {
     public String getNome() {
         return nome;
     }
-    public Date getDataNascimento() {
+    public String getDataNascimento() {
         return dataNascimento;
     }
     public double getSalario() {
@@ -62,7 +83,7 @@ public class Funcionario {
     public void setCargo(String cargo) {
         this.cargo = cargo;
     }
-    public void setDataNascimento(Date dataNascimento) {
+    public void setDataNascimento(String dataNascimento) {
         this.dataNascimento = dataNascimento;
     }
     public void setEstadoCivil(String estadoCivil) {

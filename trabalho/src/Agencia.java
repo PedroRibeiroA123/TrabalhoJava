@@ -6,6 +6,13 @@ public class Agencia {
     private String cidade;
     private String bairro;
     private Gerente gerente;
+    public Agencia(String bairro,String cidade,String estado,String nomeFicticio,String nroIdenti){
+        this.bairro=bairro;
+        this.cidade=cidade;
+        this.estado=estado;
+        this.nomeFicticio=nomeFicticio;
+        this.nroIdenti=nroIdenti;
+    }
     public Gerente getGerente() {
         return gerente;
     }

@@ -2,16 +2,16 @@
 import java.util.InputMismatchException;
 import java.util.Random;
 public class GeraCpfCnpj {
-    private int randomiza(int n) {
+    private static int randomiza(int n) {
         int ranNum = (int) (Math.random() * n);
         return ranNum;
     }
 
-    private int mod(int dividendo, int divisor) {
+    private static int mod(int dividendo, int divisor) {
         return (int) Math.round(dividendo - (Math.floor(dividendo / divisor) * divisor));
     }
 
-    public String cpf(boolean comPontos) {
+    public static String cpf(boolean comPontos) {
         int n = 9;
         int n1 = randomiza(n);
         int n2 = randomiza(n);
@@ -46,7 +46,7 @@ public class GeraCpfCnpj {
 
         return retorno;
     }
-    public String rg(boolean comPontos) {
+    public static String rg(boolean comPontos) {
         String  nDigResult;
         String numerosContatenados;
         String numeroGerado;
@@ -75,7 +75,7 @@ public class GeraCpfCnpj {
 
         return numeroGerado;
     }
-    public boolean isCPF(String CPF) {
+    public static boolean isCPF(String CPF) {
 
         CPF = removeCaracteresEspeciais(CPF);
 
@@ -130,7 +130,7 @@ public class GeraCpfCnpj {
             return (false);
         }
     }
-    private String removeCaracteresEspeciais(String doc) {
+    private static String removeCaracteresEspeciais(String doc) {
         if (doc.contains(".")) {
             doc = doc.replace(".", "");
         }

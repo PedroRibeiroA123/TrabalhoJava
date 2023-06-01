@@ -1,32 +1,38 @@
 import java.util.Date;
 public class Gerente extends Funcionario{
+    private static double comissao;
     private Agencia agencia;
-    //alternativa
-    //private int nroAgencia;
     private Boolean temCurso;
-    private Date dataIngresso;
-
-    /*public int getNroAgencia() {
-        return nroAgencia;
+    private String dataIngresso;
+    public Gerente(String dataIngresso,Boolean temCurso,String CPF,String nome,String nroCT,String RG,String endereco,String sexo,String estadoCivil,String cargo,double salario,int anoIngresso,String dataNascimento,double comissao){
+        super(CPF,nome,nroCT,RG,endereco,sexo,estadoCivil,cargo,salario,anoIngresso,dataNascimento);
+        this.temCurso=temCurso;
+        this.dataIngresso=dataIngresso;
+        this.comissao=comissao;
     }
-
-    public void setNroAgencia(int nroAgencia) {
-        this.nroAgencia = nroAgencia;
-    }*/
-
+    @Override
+    public double calcSalario() {
+        return (super.calcSalario()+comissao);
+    }
+    public static double getComissao() {
+        return comissao;
+    }
     public Agencia getAgencia() {
         return agencia;
     }
     public Boolean getTemCurso() {
         return temCurso;
     }
-    public Date getDataIngresso() {
+    public String getDataIngresso() {
         return dataIngresso;
+    }
+    public static void setComissao(double comissao) {
+        Gerente.comissao = comissao;
     }
     public void setAgencia(Agencia agencia) {
         this.agencia = agencia;
     }
-    public void setDataIngresso(Date dataIngresso) {
+    public void setDataIngresso(String dataIngresso) {
         this.dataIngresso = dataIngresso;
     }
     public void setTemCurso(Boolean temCurso) {
