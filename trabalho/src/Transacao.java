@@ -1,5 +1,5 @@
 import java.util.Date;
-public class Transacao {
+public class Transacao implements Comparable<Transacao>{
     private Date data;
     private double valor;
     private String canal;
@@ -46,6 +46,14 @@ public class Transacao {
     }
     public String getTipo() {
         return tipo;
+    }
+
+    public int compareTo(Transacao outro) {
+        if(data.compareTo(outro.data) < 0)
+            return -1;
+        if(data.compareTo(outro.data) > 0)
+            return 1;
+        else return 0;
     }
 }
 

@@ -4,7 +4,7 @@ public class Gerente extends Funcionario{
     private Agencia agencia;
     private Boolean temCurso;
     private String dataIngresso;
-    public Gerente(String dataIngresso,Boolean temCurso,String CPF,String nome,String nroCT,String RG,String endereco,String sexo,String estadoCivil,String cargo,double salario,int anoIngresso,String dataNascimento,double comissao){
+    public Gerente(String CPF,String nome,String nroCT,String RG,String endereco,String sexo,String estadoCivil,String cargo,double salario,int anoIngresso,String dataNascimento, Boolean temCurso, String dataIngresso, double comissao){
         super(CPF,nome,nroCT,RG,endereco,sexo,estadoCivil,cargo,salario,anoIngresso,dataNascimento);
         this.temCurso=temCurso;
         this.dataIngresso=dataIngresso;

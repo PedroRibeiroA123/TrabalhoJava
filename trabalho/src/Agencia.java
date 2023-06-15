@@ -1,5 +1,6 @@
 import java.util.Date;
-public class Agencia {
+import java.io.Serializable;
+public class Agencia implements Serializable ,Comparable<Agencia>{
     private String nroIdenti;
     private String nomeFicticio;
     private String estado;
@@ -48,5 +49,18 @@ public class Agencia {
     }
     public void setNroIdenti(String nroIdenti) {
         this.nroIdenti = nroIdenti;
+    }
+
+    public boolean validaAgencia(String nro){
+        if(nroIdenti.compareTo(nro) == 0)
+            return true;
+        return false;
+    }
+    public int compareTo(Agencia a){
+        if(this.nroIdenti.compareTo(a.nroIdenti) < 0)
+            return -1;
+        if(this.nroIdenti.compareTo(a.nroIdenti) > 0)
+            return 1;
+        return 0;
     }
 }
