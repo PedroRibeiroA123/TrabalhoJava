@@ -56,5 +56,9 @@ public class Transacao implements Serializable, Comparable<Transacao>{
             return 1;
         else return 0;
     }
+
+    public void Imprime(){
+        System.out.println("Data: " + data + "\nTipo: " + tipo + "\nValor: " + valor + "\nCanal: " + canal);
+    }
 }
 

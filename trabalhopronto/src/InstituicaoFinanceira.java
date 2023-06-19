@@ -27,6 +27,7 @@ public class InstituicaoFinanceira {
         double valor, valorS;
         Conta conta;
         Cliente c1;
+        Scanner entrada = new Scanner(System.in);
 
         try{
             FileInputStream arqContas = new FileInputStream("Contas");
@@ -34,11 +35,24 @@ public class InstituicaoFinanceira {
             contas = (ArrayList<Conta>) isc.readObject();
             isc.close();
             arqContas.close();
+        }catch(IOException erro){
+            System.out.println("Ocorreu erro na leitura dos dados" + erro);
+        }catch(ClassNotFoundException erro){
+            System.out.println("Alguma classe nao foi encontrada" + erro);
+        }
+
+        try{
             FileInputStream arqAgencia = new FileInputStream("Agencias");
             ObjectInputStream isa = new ObjectInputStream(arqAgencia);
             agencias = (ArrayList<Agencia>) isa.readObject();
             isa.close();
             arqAgencia.close();
+        }catch(IOException erro){
+            System.out.println("Ocorreu erro na leitura dos dados" + erro);
+        }catch(ClassNotFoundException erro){
+            System.out.println("Alguma classe nao foi encontrada" + erro);
+        }
+        try{
             FileInputStream arqPessoa = new FileInputStream("Pessoas");
             ObjectInputStream isp = new ObjectInputStream(arqPessoa);
             pessoas = (ArrayList<Pessoa>) isp.readObject();
@@ -49,8 +63,6 @@ public class InstituicaoFinanceira {
         }catch(ClassNotFoundException erro){
             System.out.println("Alguma classe nao foi encontrada" + erro);
         }
-        Scanner entrada = new Scanner(System.in);
-
 
         /*Agencia BB = new Agencia("Santa Monica","Uberlandia","MG","Banco do Brasil","5555");
         Gerente cleito = new Gerente("51142005690","Cleiton","564764","6445654","aaa","M","Solteiro",2666.666,2001,"15/08/1987",true,"09/11/2001",555.55);
@@ -255,7 +267,7 @@ public class InstituicaoFinanceira {
                                             System.out.println("Bem vindo!");
                                             System.out.println("Saldo: " + conta.getSaldo(senha));
                                             System.out.println("O que deseja fazer: ");
-                                            System.out.println("1 - Saque\n2 - Deposito\n3 - Pagamento\n9 - Sair");
+                                            System.out.println("1 - Saque\n2 - Deposito\n3 - Pagamento\n4 - Consultar Transações\n9 - Sair");
                                             op = entrada.nextInt();
                                             entrada.nextLine();
                                             switch(op){
@@ -292,6 +304,8 @@ public class InstituicaoFinanceira {
                                                         System.out.println(e.getMessage());
                                                     }
                                                     break;
+                                                case 4:
+                                                    conta.ImprimeTransações();
                                             }
                                         }while(op != 9);
                                     }
@@ -463,11 +477,19 @@ public class InstituicaoFinanceira {
             os.writeObject(contas);
             os.close();
             ContasArq.close();
+        }catch(IOException erro){
+            System.out.println("Ocorreu erro na escrita dos dados" + erro);
+        }
+        try{
             FileOutputStream AgenciaArq = new FileOutputStream("Agencias");
             ObjectOutputStream osa = new ObjectOutputStream(AgenciaArq);
             osa.writeObject(agencias);
             osa.close();
             AgenciaArq.close();
+        }catch(IOException erro){
+            System.out.println("Ocorreu erro na escrita dos dados" + erro);
+        }
+        try{
             FileOutputStream PessoaArq = new FileOutputStream("Pessoas");
             ObjectOutputStream osp = new ObjectOutputStream(PessoaArq);
             osp.writeObject(pessoas);

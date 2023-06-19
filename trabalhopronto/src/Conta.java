@@ -130,4 +130,9 @@ public abstract class Conta implements Serializable, Comparable<Conta> {
     public void Imprimir(){
         System.out.println("Numero: " + nro + "\nAgencia: " + agencia.getNomeFicticio() +" (" + agencia.getNroIdenti()+ ")\nAtivada: " + ativada);
     }
+    public void ImprimeTransações(){
+        for(int i = 0; i < transacoes.size();i++){
+            transacoes.get(i).Imprime();
+        }
+    }
 }
