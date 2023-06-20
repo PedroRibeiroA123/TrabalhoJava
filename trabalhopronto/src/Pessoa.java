@@ -8,6 +8,9 @@ public abstract class Pessoa implements Serializable, Comparable<Pessoa>{
     private String estadoCivil;
     private String dataNascimento;
 
+    /*Nos construtores de Pessoa, na inserção de CPF é verificado caso o CPF é valido, chamando a função isCPF da classe
+     GeraCpfCnpj, caso nao seja ele retorna a exception CpfInvalidoException
+    */
     public Pessoa(String CPF, String Nome, String endereco, String estadoCivil, String dataNascimento){
         if(GeraCpfCnpj.isCPF(CPF))
             this.CPF = CPF;
@@ -26,7 +29,7 @@ public abstract class Pessoa implements Serializable, Comparable<Pessoa>{
     public Pessoa(){}
 
     public void Imprimir(){
-        System.out.println("Nome: " + nome + "\nCPF: " + CPF + "\nEndereco: " + endereco + "\nEsdao Civil: " + estadoCivil + "Data de Nascimento: " + dataNascimento);
+        System.out.println("Nome: " + nome + "\nCPF: " + CPF + "\nEndereco: " + endereco + "\nEsdao Civil: " + estadoCivil + "\nData de Nascimento: " + dataNascimento);
     }
 
     public String getCPF() {
@@ -68,7 +71,7 @@ public abstract class Pessoa implements Serializable, Comparable<Pessoa>{
     public void setEstadoCivil(String estadoCivil) {
         this.estadoCivil = estadoCivil;
     }
-
+    /*comparação de cpf entre duas pessoas*/
     public int compareTo(Pessoa a){
         if(this.CPF.compareTo(a.CPF) < 0)
             return -1;

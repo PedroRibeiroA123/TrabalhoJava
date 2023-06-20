@@ -35,17 +35,21 @@ public abstract class Conta implements Serializable, Comparable<Conta> {
     public String getSenha() {
         return senha;
     }
+    /*verifica se a String fornecida corresponde a String fornecida previamente como senha*/
     public Boolean verificaSenha(String senha){
         if(this.senha.compareTo(senha) == 0)
             return true;
         throw new SenhaIncorretaException("Senha Incorreta!");
     }
+    /*metodos abstratos, como foram pedidos na questão 5.
+    * estes métodos são tutilizados tanto em conta corrente como em conta poupança, em conta salário,
+    * por isso a necessidade de serem abstratos, fazemos override deles em cada uma dessas subclases*/
     public abstract void sacaValor(String senha, double valor);
     public abstract void depositaValor(String senha, double valor);
     public abstract void efetuaPagamento(String senha, double valor);
     public void consultaSaldo(String senha){
         verificaSenha(senha);
-        if(!ativada) throw new RuntimeException("Conta Inativa");
+        if(!ativada) throw new RuntimeException("Conta Inativa, ou seja saldo é 0");
         System.out.println("O saldo eh: R$" + saldo);
     }
     public Agencia getAgencia(String senha) {
@@ -119,6 +123,7 @@ public abstract class Conta implements Serializable, Comparable<Conta> {
         this.saldo = saldo;
         ativada = this.saldo != 0;
     }
+    /*comparação entre saldo de contas*/
     public int compareTo(Conta a){
         if(this.saldo < a.saldo)
             return -1;
@@ -130,6 +135,7 @@ public abstract class Conta implements Serializable, Comparable<Conta> {
     public void Imprimir(){
         System.out.println("Numero: " + nro + "\nAgencia: " + agencia.getNomeFicticio() +" (" + agencia.getNroIdenti()+ ")\nAtivada: " + ativada);
     }
+    /*Aqui é impresso na tela cada transação da lista de transações da conta selecionada*/
     public void ImprimeTransações(){
         for(int i = 0; i < transacoes.size();i++){
             transacoes.get(i).Imprime();

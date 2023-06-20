@@ -21,6 +21,7 @@ public class Funcionario extends Pessoa{
         super.Imprimir();
         System.out.println("Status: Funcionario" + "\nNúmero CT: " + nroCT + "\nRG: " + RG + "\nSexo: " + sexo + "\nCargo: " + cargo + "\nSalario: " + salario +  "\nAno de Ingresso: " + anoIngresso);
     }
+    /*Aqui se calcula o salario como estava pedido no trabalho*/
     public double calcSalario(){
         int ano = java.time.Year.now().getValue();
         if(ano - anoIngresso >=15)

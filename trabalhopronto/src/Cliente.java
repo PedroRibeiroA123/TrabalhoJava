@@ -1,5 +1,7 @@
 import java.util.ArrayList;
 import java.util.Date;
+/*Esta classe herda a classe pessoa, dentro dela, entre outras variáveis temos a variavel que guarda o cpf, que é utilizada para várias
+* verificações, principalmente as que envolvem as contas */
 public class Cliente extends Pessoa {
     private String escolaridade;
     private Agencia agencia;

@@ -265,7 +265,11 @@ public class InstituicaoFinanceira {
                                         }
                                         do{
                                             System.out.println("Bem vindo!");
-                                            System.out.println("Saldo: " + conta.getSaldo(senha));
+                                            try{
+                                                conta.consultaSaldo(senha);
+                                            }catch(RuntimeException e){
+                                                System.out.println(e.getMessage());
+                                            }
                                             System.out.println("O que deseja fazer: ");
                                             System.out.println("1 - Saque\n2 - Deposito\n3 - Pagamento\n4 - Consultar Transações\n9 - Sair");
                                             op = entrada.nextInt();
@@ -319,99 +323,101 @@ public class InstituicaoFinanceira {
                     op = 0;
                     break;
                 case 2: //FUNCIONARIO
-                    System.out.println("Digite a opção desejada:");
-                    System.out.println("1 - Cadastrar Funcionario");
-                    System.out.println("2 - Cadastrar Gerente");
-                    System.out.println("9 - Voltar");
-                    op = entrada.nextInt();
-                    entrada.nextLine();
-                    switch(op){
-                        case 1:
-                            System.out.println("Digite as seguintes informações:");
-                            System.out.println("CPF: ");
-                            CPF = entrada.nextLine();
-                            System.out.println("Nome Completo: ");
-                            Nome = entrada.nextLine();
-                            System.out.println("Numero da Carteira de Trabalho: ");
-                            nroC = entrada.nextLine();
-                            System.out.println("RG: ");
-                            RG = entrada.nextLine();
-                            System.out.println("Endereco: ");
-                            endereco = entrada.nextLine();
-                            System.out.println("Sexo: ");
-                            sexo = entrada.nextLine();
-                            System.out.println("Estado Civil: ");
-                            estadoCiv = entrada.nextLine();
-                            System.out.println("Data de nascimento: ");
-                            nascimento = entrada.nextLine();
-                            System.out.println("Cargo: ");
-                            cargo = entrada.nextLine();
-                            System.out.println("Salario: ");
-                            valor = entrada.nextDouble();
-                            System.out.println("Ano de Ingresso: ");
-                            ano = entrada.nextInt();
-                            try {
-                                pessoas.add(new Funcionario(CPF,Nome,nroC,RG,endereco,sexo,estadoCiv,cargo,valor,ano,nascimento));
-                            } catch (CpfInvalidoException e) {
-                                System.out.println(e.getMessage());
-                            }
-                            break;
-                        case 2:
-                            System.out.println("Digite as seguintes informações:");
-                            System.out.println("CPF: ");
-                            CPF = entrada.nextLine();
-                            System.out.println("Nome Completo: ");
-                            Nome = entrada.nextLine();
-                            System.out.println("Numero da Carteira de Trabalho: ");
-                            nroC = entrada.nextLine();
-                            System.out.println("RG: ");
-                            RG = entrada.nextLine();
-                            System.out.println("Endereco: ");
-                            endereco = entrada.nextLine();
-                            System.out.println("Sexo: ");
-                            sexo = entrada.nextLine();
-                            System.out.println("Estado Civil: ");
-                            estadoCiv = entrada.nextLine();
-                            System.out.println("Data de nascimento: ");
-                            nascimento = entrada.nextLine();
-                            System.out.println("Salario: ");
-                            valorS = entrada.nextDouble();
-                            System.out.println("Ano de Ingresso: ");
-                            ano = entrada.nextInt();
-                            System.out.println("O gerente tem curso de administracao? (S = 1/N = 0)");
-                            sn = entrada.nextInt();
-                            entrada.nextLine();
-                            if(sn == 1)
-                                curso = true;
-                            else
-                                curso = false;
-                            System.out.println("Data de Ingresso: ");
-                            data = entrada.nextLine();
-                            System.out.println("Valor de comissaso");
-                            valor = entrada.nextDouble();
-                            entrada.nextLine();
-                            System.out.println("Numero da agencia: ");
-                            nro = entrada.nextLine();
-                            flag = true;
-                            for(int i = 0; i < agencias.size();i++){
-                                if(agencias.get(i).validaAgencia(nro)){
-                                    agencia = agencias.get(i);
-                                    flag = false;
-                                    try {
-                                        Gerente gerente = new Gerente(CPF,Nome,nroC,RG,endereco,sexo,estadoCiv,valorS,ano,nascimento,curso,data,valor);
-                                        pessoas.add(gerente);
-                                        agencia.setGerente(gerente);
-                                        gerente.setAgencia(agencia);
-                                    } catch (CpfInvalidoException e) {
-                                        System.out.println(e.getMessage());
-                                    }
-                                    break;
+                    do{
+                        System.out.println("Digite a opção desejada:");
+                        System.out.println("1 - Cadastrar Funcionario");
+                        System.out.println("2 - Cadastrar Gerente");
+                        System.out.println("9 - Voltar");
+                        op = entrada.nextInt();
+                        entrada.nextLine();
+                        switch(op){
+                            case 1:
+                                System.out.println("Digite as seguintes informações:");
+                                System.out.println("CPF: ");
+                                CPF = entrada.nextLine();
+                                System.out.println("Nome Completo: ");
+                                Nome = entrada.nextLine();
+                                System.out.println("Numero da Carteira de Trabalho: ");
+                                nroC = entrada.nextLine();
+                                System.out.println("RG: ");
+                                RG = entrada.nextLine();
+                                System.out.println("Endereco: ");
+                                endereco = entrada.nextLine();
+                                System.out.println("Sexo: ");
+                                sexo = entrada.nextLine();
+                                System.out.println("Estado Civil: ");
+                                estadoCiv = entrada.nextLine();
+                                System.out.println("Data de nascimento: ");
+                                nascimento = entrada.nextLine();
+                                System.out.println("Cargo: ");
+                                cargo = entrada.nextLine();
+                                System.out.println("Salario: ");
+                                valor = entrada.nextDouble();
+                                System.out.println("Ano de Ingresso: ");
+                                ano = entrada.nextInt();
+                                try {
+                                    pessoas.add(new Funcionario(CPF,Nome,nroC,RG,endereco,sexo,estadoCiv,cargo,valor,ano,nascimento));
+                                } catch (CpfInvalidoException e) {
+                                    System.out.println(e.getMessage());
                                 }
-                            }
-                            if(flag)
-                                System.out.println("Agencia nao encontrada");
-
-                    }
+                                break;
+                            case 2:
+                                System.out.println("Digite as seguintes informações:");
+                                System.out.println("CPF: ");
+                                CPF = entrada.nextLine();
+                                System.out.println("Nome Completo: ");
+                                Nome = entrada.nextLine();
+                                System.out.println("Numero da Carteira de Trabalho: ");
+                                nroC = entrada.nextLine();
+                                System.out.println("RG: ");
+                                RG = entrada.nextLine();
+                                System.out.println("Endereco: ");
+                                endereco = entrada.nextLine();
+                                System.out.println("Sexo: ");
+                                sexo = entrada.nextLine();
+                                System.out.println("Estado Civil: ");
+                                estadoCiv = entrada.nextLine();
+                                System.out.println("Data de nascimento: ");
+                                nascimento = entrada.nextLine();
+                                System.out.println("Salario: ");
+                                valorS = entrada.nextDouble();
+                                System.out.println("Ano de Ingresso: ");
+                                ano = entrada.nextInt();
+                                System.out.println("O gerente tem curso de administracao? (S = 1/N = 0)");
+                                sn = entrada.nextInt();
+                                entrada.nextLine();
+                                if(sn == 1)
+                                    curso = true;
+                                else
+                                    curso = false;
+                                System.out.println("Data de Ingresso: ");
+                                data = entrada.nextLine();
+                                System.out.println("Valor de comissaso");
+                                valor = entrada.nextDouble();
+                                entrada.nextLine();
+                                System.out.println("Numero da agencia: ");
+                                nro = entrada.nextLine();
+                                flag = true;
+                                for(int i = 0; i < agencias.size();i++){
+                                    if(agencias.get(i).validaAgencia(nro)){
+                                        agencia = agencias.get(i);
+                                        flag = false;
+                                        try {
+                                            Gerente gerente = new Gerente(CPF,Nome,nroC,RG,endereco,sexo,estadoCiv,valorS,ano,nascimento,curso,data,valor);
+                                            pessoas.add(gerente);
+                                            agencia.setGerente(gerente);
+                                            gerente.setAgencia(agencia);
+                                        } catch (CpfInvalidoException e) {
+                                            System.out.println(e.getMessage());
+                                        }
+                                        break;
+                                    }
+                                }
+                                if(flag)
+                                    System.out.println("Agencia nao encontrada");
+                                break;
+                        }
+                    }while(op != 9);
                     op = 0;
                     break;
                 case 3: //ADM
@@ -501,4 +507,4 @@ public class InstituicaoFinanceira {
     }
 }
 //072.522.427-49
-//727.195.880-08
+//727.195.880-083

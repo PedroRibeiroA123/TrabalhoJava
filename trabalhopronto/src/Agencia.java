@@ -1,5 +1,7 @@
 import java.util.Date;
 import java.io.Serializable;
+/*A agencia engloba todas as contas, o gerente, e quase todas as operações disponibilizadas no menu pedem o número da agencia. A variável
+* mais importante é o número de identificação*/
 public class Agencia implements Serializable ,Comparable<Agencia>{
     private String nroIdenti;
     private String nomeFicticio;
@@ -51,11 +53,14 @@ public class Agencia implements Serializable ,Comparable<Agencia>{
         this.nroIdenti = nroIdenti;
     }
 
+    /*Realiza a verificação do número de identificação da agencia, com o número dado*/
     public boolean validaAgencia(String nro){
         if(nroIdenti.compareTo(nro) == 0)
             return true;
         return false;
     }
+    /*comparação entre números de identificação, para ordenação*/
+
     public int compareTo(Agencia a){
         if(this.nroIdenti.compareTo(a.nroIdenti) < 0)
             return -1;
@@ -63,6 +68,7 @@ public class Agencia implements Serializable ,Comparable<Agencia>{
             return 1;
         return 0;
     }
+
     public void Imprimir(){
         System.out.println("Nome: " + nomeFicticio + "\nIdentificação: " + nroIdenti);
         if(this.gerente == null){
